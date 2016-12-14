@@ -1,16 +1,75 @@
 #include <iostream>
+#include <stdlib.h>
 using namespace std;
-int main(int argc, const char* argv[]) {
+
+class PrimeNumbersUntil_n {
+public:
+	PrimeNumbersUntil_n(int number);
+	~PrimeNumbersUntil_n();
+	int findPrimeNumbers();
+	void printPrimeNumbers();
+private:
+	int* data;
+	int count;
+	int number;
+};
+
+PrimeNumbersUntil_n::PrimeNumbersUntil_n(int num)
+{
+	number = num;
+	data = new int[number / 2];
+}
+
+PrimeNumbersUntil_n::~PrimeNumbersUntil_n()
+{
+	delete[] data;
+}
 
 
-	for (int i = 0; i<argc; i++)
+int PrimeNumbersUntil_n::findPrimeNumbers()
+{
+	int count = 0;
+	for (int i = 2; i <= number; i++)
 	{
-		cout << argv[i] << endl;
+		//i-t vizsgáljuk, hogy prím-e?
+		int j;
+		for (j = 2; j <= i / 2; j++)
+		{
+			if (i%j == 0)
+			{
+				break;
+			}
+		}
+		if (j>i / 2)
+		{
+			data[count] = i;
+			count++;
+		}
 	}
+	for (int i = 0; i<count; i++)
+	{
+		cout << data[i] << endl;
+	}
+	return count;
+}
 
 
-	//how to make exefile in visual studio
-	//sleep(10000);
-	system("pause");
+void PrimeNumbersUntil_n::printPrimeNumbers()
+{
+	for (int i = 0; i<count; i++)
+	{
+		cout << data[i] << endl;
+	}
+}
+
+
+int main(int argc, const char* argv[])
+{
+	int a = atoi(argv[1]); //because the first command line argument is a char type variable
+						   //so we have to convert it to int type by atoi() function 
+	PrimeNumbersUntil_n p1(a);
+	p1.findPrimeNumbers();
+	p1.printPrimeNumbers();
+	//system("pause");
 	return 0;
 }
