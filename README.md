@@ -10,5 +10,5 @@ argv[1] - first parameter after the name of the program
 2. linux code editor:
 gedit first.cpp &
 
-3. compile command
+3. compile command:
 g++ -o first first.cpp
